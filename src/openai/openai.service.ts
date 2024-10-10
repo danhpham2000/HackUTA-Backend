@@ -1,24 +1,16 @@
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Injectable } from '@nestjs/common';
-import OpenAI from 'openai';
 
 @Injectable()
 export class OpenaiService {
-  openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
+  genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
+  async testgpt() {
+    const model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const prompt =
+      'Write 4 different projects for food and agriculture in software engineering';
 
-  async testGPT() {
-    const completion = await this.openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'user',
-          content:
-            'Write 4 different projects that related to food and agriculture in software engineering',
-        },
-      ],
-    });
+    const result = await model.generateContent(prompt);
 
-    return completion.choices;
+    return result.response.text();
   }
 }

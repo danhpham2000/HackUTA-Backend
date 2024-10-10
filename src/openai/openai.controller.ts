@@ -7,6 +7,6 @@ export class OpenaiController {
 
   @Get('/testgpt')
   async generateText() {
-    return this.openaiService.testGPT();
+    return this.openaiService.testgpt();
   }
 }
