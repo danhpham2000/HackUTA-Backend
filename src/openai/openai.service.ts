@@ -7,7 +7,7 @@ export class OpenaiService {
   async testgpt() {
     const model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     const prompt =
-      'Generate all AWS learning concepts for Cloud Practitioner a';
+      'Generate all FE content for Processing Engineering especially for FE exam';
 
     const result = await model.generateContent(prompt);
 
