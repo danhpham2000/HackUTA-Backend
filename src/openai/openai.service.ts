@@ -7,10 +7,18 @@ export class OpenaiService {
   async testgpt() {
     const model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
     const prompt =
-      'Write 4 different projects for food and agriculture in software engineering';
+      'Generate all AWS learning concepts for Cloud Practitioner a';
 
     const result = await model.generateContent(prompt);
 
-    return result.response.text();
+    let response = result.response.text().split('\n');
+
+    const title = response[0];
+
+    response = response.filter((content) => content !== '');
+    return {
+      title: title,
+      response: response,
+    };
   }
 }
